@@ -1,0 +1,44 @@
+library(readxl)
+library(plyr)
+library(ggplot2)
+mdck = read_excel("q3d1.xlsx", sheet = 'newmdck')         
+mu = ddply(mdck, 'delivery', summarise, grp.mean = mean(time))
+head(mu)
+p1 = ggplot(mdck, aes(x=time, color = delivery)) + geom_density() + geom_vline(data = mu, aes(xintercept = grp.mean, color = delivery), linetype = 'dashed') + ggtitle('MDCK cell line')
+p1
+hpec = read_excel("q3d1.xlsx", sheet = 'newhpec')
+mu2 = ddply(hpec, 'delivery', summarise, grp.mean = mean(time))
+head(mu2)
+p2 = ggplot(hpec, aes(x=time, color = delivery)) + geom_density() + geom_vline(data = mu2, aes(xintercept = grp.mean, color = delivery), linetype = 'dashed') + ggtitle('HPEC cell line')
+p2
+fib = read_excel('q3d1.xlsx', sheet = 'newfib')
+mu = ddply(fib, 'delivery', summarise, grp.mean = mean(time))
+head(mu)
+p3 = ggplot(fib, aes(x=time, color = delivery)) + geom_density() + geom_vline(data = mu, aes(xintercept = grp.mean, color = delivery), linetype = 'dashed') + ggtitle('Fibroblast cell line')
+p3
+
+####################
+
+metallic = read_excel('q3d1.xlsx', sheet = 'newmet')
+mu = ddply(metallic, 'group', summarise, grp.mean = mean(time))
+head(mu)
+p4 = ggplot(metallic, aes(x=time, color = group)) + geom_density() + geom_vline(data = mu, aes(xintercept = grp.mean, color = group), linetype = 'dashed') + ggtitle('metallic delivery method')  
+p4
+                                                       
+polymer = read_excel('q3d1.xlsx', sheet = 'newpoly')                                                        
+mu = ddply(polymer, 'group', summarise, grp.mean = mean(time))
+head(mu)
+p5 = ggplot(metallic, aes(x=time, color = group)) + geom_density() + geom_vline(data = mu, aes(xintercept = grp.mean, color = group), linetype = 'dashed') + ggtitle('polymer delivery method')
+p5
+
+ecm = read_excel('q3d1.xlsx', sheet = 'newecm')
+mu = ddply(ecm, 'group', summarise, grp.mean = mean(time))
+head(mu)
+p6 = ggplot(ecm, aes(x=time, color = group)) + geom_density() + geom_vline(data = mu, aes(xintercept = grp.mean, color = group), linetype = 'dashed') + ggtitle('ECM delivery method')
+p6
+
+liposome = read_excel('q3d1.xlsx', sheet = 'newlipo')                                                          
+mu = ddply(liposome, 'group', summarise, grp.mean = mean(time))
+head(mu)
+p7 = ggplot(liposome, aes(x=time, color = group)) + geom_density() + geom_vline(data = mu, aes(xintercept = grp.mean, color = group), linetype = 'dashed') + ggtitle('Liposome delivery method')
+p7
